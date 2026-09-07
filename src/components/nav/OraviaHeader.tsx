@@ -99,7 +99,7 @@ export default function OraviaHeader() {
             {/* Mobile Menu Trigger */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-[#111111] hover:bg-black/5 active:bg-black/10 rounded-lg transition-colors"
+              className="md:hidden p-2 text-[#111111] hover:bg-black/5 active:bg-black/10 rounded-lg border border-[#EAEAEA] bg-white transition-colors"
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -134,6 +134,14 @@ export default function OraviaHeader() {
               className="py-3.5 px-2 flex items-center justify-between text-[#111111] hover:text-black font-semibold text-lg"
             >
               <span>Methodology</span>
+              <ArrowRight className="w-4 h-4 text-[#888888]" />
+            </a>
+            <a
+              href="#legitlab"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="py-3.5 px-2 flex items-center justify-between text-[#111111] hover:text-black font-semibold text-lg"
+            >
+              <span>LegitLab</span>
               <ArrowRight className="w-4 h-4 text-[#888888]" />
             </a>
             <a
