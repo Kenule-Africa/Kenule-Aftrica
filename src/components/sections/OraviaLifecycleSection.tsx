@@ -64,13 +64,13 @@ export default function OraviaLifecycleSection() {
       <div className="sticky top-0 left-0 w-full h-screen overflow-hidden flex flex-col items-center justify-center">
         <div className="absolute inset-0 bg-[radial-gradient(#00000008_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
 
-        <div className="max-w-4xl w-full px-6 md:px-12 relative z-10 flex flex-col items-center h-full py-16">
+        <div className="max-w-4xl w-full px-4 sm:px-8 lg:px-0 relative z-10 flex flex-col items-center h-full py-8 sm:py-16 justify-center">
           {/* Sticky Header */}
           <div
             ref={headerRef}
-            className="text-center mb-8 shrink-0 opacity-0 transition-opacity duration-500"
+            className="text-center mb-4 sm:mb-8 shrink-0 opacity-0 transition-opacity duration-500"
           >
-            <h2 className="font-sans text-2xl md:text-3xl font-semibold text-[#111111] tracking-tight mb-2">
+            <h2 className="font-sans text-xl sm:text-2xl md:text-3xl font-semibold text-[#111111] tracking-tight mb-1 sm:mb-2">
               The Kenule Innovation Lifecycle
             </h2>
             <p className="text-[#666666] text-xs sm:text-sm max-w-md mx-auto">
@@ -89,17 +89,17 @@ export default function OraviaLifecycleSection() {
               className="absolute left-1/2 top-4 w-px bg-[#111111] -translate-x-1/2 transition-all duration-75 ease-linear h-0 max-h-[calc(100%-2rem)]"
             ></div>
 
-            <div className="space-y-12 py-4 relative">
+            <div className="space-y-6 sm:space-y-12 py-2 sm:py-4 relative">
               {/* Step 1: Context */}
               <div
                 className="lifecycle-step group flex items-center justify-between w-full opacity-30 transition-all duration-300"
                 data-threshold="0.08"
               >
-                <div className="w-[42%] text-right pr-6 sm:pr-8">
-                  <span className="font-mono text-[10px] text-[#666666] uppercase tracking-wider block mb-1">
+                <div className="w-[44%] sm:w-[42%] text-right pr-2.5 sm:pr-8">
+                  <span className="font-mono text-[9px] sm:text-[10px] text-[#666666] uppercase tracking-wider block mb-0.5 sm:mb-1">
                     01 Context
                   </span>
-                  <h3 className="font-sans text-sm sm:text-base font-semibold text-[#111111]">
+                  <h3 className="font-sans text-xs sm:text-base font-semibold text-[#111111]">
                     The African Challenge
                   </h3>
                   <p className="text-xs text-[#666666] mt-0.5 hidden md:block">
@@ -107,13 +107,13 @@ export default function OraviaLifecycleSection() {
                   </p>
                 </div>
                 <div className="relative shrink-0 z-10">
-                  <div className="w-3 h-3 rounded-full border border-[#EAEAEA] bg-[#FAFAFA] group-[.active]:border-[#111111] group-[.active]:bg-[#111111] transition-colors duration-300"></div>
+                  <div className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-[#EAEAEA] group-[.active]:bg-[#111111] transition-colors duration-300"></div>
                 </div>
-                <div className="w-[42%] pl-6 sm:pl-8">
-                  <div className="bg-white border border-[#EAEAEA] p-3 rounded shadow-sm inline-block">
-                    <div className="flex items-center gap-2">
-                      <HelpCircle className="w-3.5 h-3.5 text-[#666666]" />
-                      <span className="text-xs font-medium text-[#111111]">
+                <div className="w-[44%] sm:w-[42%] pl-2.5 sm:pl-8">
+                  <div className="bg-white p-2.5 sm:p-3.5 rounded-xl shadow-md inline-block">
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <HelpCircle className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#666666] shrink-0" />
+                      <span className="text-[11px] sm:text-xs font-medium text-[#111111] leading-tight">
                         How does Africa move value seamlessly?
                       </span>
                     </div>
@@ -126,22 +126,22 @@ export default function OraviaLifecycleSection() {
                 className="lifecycle-step group flex items-center justify-between w-full opacity-30 transition-all duration-300"
                 data-threshold="0.22"
               >
-                <div className="w-[42%] text-right pr-6 sm:pr-8">
-                  <div className="bg-white border border-[#EAEAEA] p-3 rounded shadow-sm inline-block text-left">
-                    <span className="text-[10px] text-[#666666] block mb-1">Assumption</span>
-                    <span className="text-xs font-medium text-[#111111]">
+                <div className="w-[44%] sm:w-[42%] text-right pr-2.5 sm:pr-8">
+                  <div className="bg-white p-2.5 sm:p-3.5 rounded-xl shadow-md inline-block text-left">
+                    <span className="text-[9px] sm:text-[10px] text-[#666666] block mb-0.5 sm:mb-1">Assumption</span>
+                    <span className="text-[11px] sm:text-xs font-medium text-[#111111] leading-tight">
                       Traditional models gatekeep talent & capital
                     </span>
                   </div>
                 </div>
                 <div className="relative shrink-0 z-10">
-                  <div className="w-3 h-3 rounded-full border border-[#EAEAEA] bg-[#FAFAFA] group-[.active]:border-[#111111] group-[.active]:bg-[#111111] transition-colors duration-300"></div>
+                  <div className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-[#EAEAEA] group-[.active]:bg-[#111111] transition-colors duration-300"></div>
                 </div>
-                <div className="w-[42%] pl-6 sm:pl-8">
-                  <span className="font-mono text-[10px] text-[#666666] uppercase tracking-wider block mb-1">
+                <div className="w-[44%] sm:w-[42%] pl-2.5 sm:pl-8">
+                  <span className="font-mono text-[9px] sm:text-[10px] text-[#666666] uppercase tracking-wider block mb-0.5 sm:mb-1">
                     02 Input
                   </span>
-                  <h3 className="font-sans text-sm sm:text-base font-semibold text-[#111111]">
+                  <h3 className="font-sans text-xs sm:text-base font-semibold text-[#111111]">
                     Democratization
                   </h3>
                   <p className="text-xs text-[#666666] mt-0.5 hidden md:block">
@@ -155,11 +155,11 @@ export default function OraviaLifecycleSection() {
                 className="lifecycle-step group flex items-center justify-between w-full opacity-30 transition-all duration-300"
                 data-threshold="0.38"
               >
-                <div className="w-[42%] text-right pr-6 sm:pr-8">
-                  <span className="font-mono text-[10px] text-[#666666] uppercase tracking-wider block mb-1">
+                <div className="w-[44%] sm:w-[42%] text-right pr-2.5 sm:pr-8">
+                  <span className="font-mono text-[9px] sm:text-[10px] text-[#666666] uppercase tracking-wider block mb-0.5 sm:mb-1">
                     03 Evidence
                   </span>
-                  <h3 className="font-sans text-sm sm:text-base font-semibold text-[#111111]">
+                  <h3 className="font-sans text-xs sm:text-base font-semibold text-[#111111]">
                     LegitLab Cohorts
                   </h3>
                   <p className="text-xs text-subtle mt-0.5 hidden md:block">
@@ -167,16 +167,16 @@ export default function OraviaLifecycleSection() {
                   </p>
                 </div>
                 <div className="relative shrink-0 z-10">
-                  <div className="w-3 h-3 rounded-full border border-[#EAEAEA] bg-[#FAFAFA] group-[.active]:border-[#111111] group-[.active]:bg-[#111111] transition-colors duration-300"></div>
+                  <div className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-[#EAEAEA] group-[.active]:bg-[#111111] transition-colors duration-300"></div>
                 </div>
-                <div className="w-[42%] pl-6 sm:pl-8">
-                  <div className="bg-white border border-[#EAEAEA] p-3 rounded shadow-sm inline-flex items-center gap-3">
-                    <div className="w-8 h-8 bg-slate-50 rounded flex items-center justify-center border border-[#EAEAEA]">
-                      <BarChart3 className="w-4 h-4 text-[#666666]" />
+                <div className="w-[44%] sm:w-[42%] pl-2.5 sm:pl-8">
+                  <div className="bg-white p-2.5 sm:p-3.5 rounded-xl shadow-md inline-flex items-center gap-2 sm:gap-3">
+                    <div className="w-6 sm:w-8 h-6 sm:h-8 bg-slate-50 rounded-lg flex items-center justify-center shrink-0">
+                      <BarChart3 className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-[#666666]" />
                     </div>
                     <div>
-                      <div className="text-[10px] text-[#666666]">Jos Plateau Hub</div>
-                      <div className="text-xs font-bold text-[#111111]">100% Free Tuition</div>
+                      <div className="text-[9px] sm:text-[10px] text-[#666666]">Jos Hub</div>
+                      <div className="text-[11px] sm:text-xs font-bold text-[#111111]">100% Free</div>
                     </div>
                   </div>
                 </div>
@@ -187,26 +187,21 @@ export default function OraviaLifecycleSection() {
                 className="lifecycle-step group flex items-center justify-between w-full opacity-30 transition-all duration-300"
                 data-threshold="0.54"
               >
-                <div className="w-[42%] text-right pr-6 sm:pr-8">
-                  <div className="bg-white border border-[#EAEAEA] p-3 rounded shadow-sm inline-block max-w-[210px] text-left">
-                    <div className="flex gap-1 mb-1">
-                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
-                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
-                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
-                    </div>
-                    <span className="text-xs font-medium text-[#111111]">
+                <div className="w-[44%] sm:w-[42%] text-right pr-2.5 sm:pr-8">
+                  <div className="bg-white p-2.5 sm:p-3.5 rounded-xl shadow-md inline-block max-w-[210px] text-left">
+                    <span className="text-[11px] sm:text-xs font-medium text-[#111111] leading-tight">
                       Stablecoin neobank + community event flywheel
                     </span>
                   </div>
                 </div>
                 <div className="relative shrink-0 z-10">
-                  <div className="w-3 h-3 rounded-full border border-[#EAEAEA] bg-[#FAFAFA] group-[.active]:border-[#111111] group-[.active]:bg-[#111111] transition-colors duration-300"></div>
+                  <div className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-[#EAEAEA] group-[.active]:bg-[#111111] transition-colors duration-300"></div>
                 </div>
-                <div className="w-[42%] pl-6 sm:pl-8">
-                  <span className="font-mono text-[10px] text-[#666666] uppercase tracking-wider block mb-1">
+                <div className="w-[44%] sm:w-[42%] pl-2.5 sm:pl-8">
+                  <span className="font-mono text-[9px] sm:text-[10px] text-[#666666] uppercase tracking-wider block mb-0.5 sm:mb-1">
                     04 Logic
                   </span>
-                  <h3 className="font-sans text-sm sm:text-base font-semibold text-[#111111]">
+                  <h3 className="font-sans text-xs sm:text-base font-semibold text-[#111111]">
                     Ecosystem Symbiosis
                   </h3>
                   <p className="text-xs text-[#666666] mt-0.5 hidden md:block">
@@ -220,11 +215,11 @@ export default function OraviaLifecycleSection() {
                 className="lifecycle-step group flex items-center justify-between w-full opacity-30 transition-all duration-300"
                 data-threshold="0.70"
               >
-                <div className="w-[42%] text-right pr-6 sm:pr-8">
-                  <span className="font-mono text-[10px] text-[#666666] uppercase tracking-wider block mb-1">
+                <div className="w-[44%] sm:w-[42%] text-right pr-2.5 sm:pr-8">
+                  <span className="font-mono text-[9px] sm:text-[10px] text-[#666666] uppercase tracking-wider block mb-0.5 sm:mb-1">
                     05 Outcome
                   </span>
-                  <h3 className="font-sans text-sm sm:text-base font-semibold text-[#111111]">
+                  <h3 className="font-sans text-xs sm:text-base font-semibold text-[#111111]">
                     Venture Launch
                   </h3>
                   <p className="text-xs text-[#666666] mt-0.5 hidden md:block">
@@ -232,10 +227,10 @@ export default function OraviaLifecycleSection() {
                   </p>
                 </div>
                 <div className="relative shrink-0 z-10">
-                  <div className="w-3 h-3 rounded-full border border-[#EAEAEA] bg-[#FAFAFA] group-[.active]:border-[#111111] group-[.active]:bg-[#111111] transition-colors duration-300"></div>
+                  <div className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-[#EAEAEA] group-[.active]:bg-[#111111] transition-colors duration-300"></div>
                 </div>
-                <div className="w-[42%] pl-6 sm:pl-8">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#111111] text-white text-xs font-semibold shadow-lg shadow-[#111111]/20">
+                <div className="w-[44%] sm:w-[42%] pl-2.5 sm:pl-8">
+                  <span className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded bg-[#111111] text-white text-[11px] sm:text-xs font-semibold shadow-lg shadow-[#111111]/20">
                     <span>Active Execution</span>
                     <Check className="w-3 h-3" />
                   </span>
@@ -247,19 +242,19 @@ export default function OraviaLifecycleSection() {
                 className="lifecycle-step group flex items-center justify-between w-full opacity-30 transition-all duration-300"
                 data-threshold="0.86"
               >
-                <div className="w-[42%] text-right pr-6 sm:pr-8">
-                  <span className="font-mono text-[10px] text-[#666666] bg-slate-100 px-2 py-1 rounded inline-block">
+                <div className="w-[44%] sm:w-[42%] text-right pr-2.5 sm:pr-8">
+                  <span className="font-mono text-[9px] sm:text-[10px] text-[#666666] bg-slate-100 px-2 py-1 rounded inline-block">
                     RC: 8380017
                   </span>
                 </div>
                 <div className="relative shrink-0 z-10">
-                  <div className="w-3 h-3 rounded-full border border-[#EAEAEA] bg-[#FAFAFA] group-[.active]:border-[#111111] group-[.active]:bg-[#111111] transition-colors duration-300"></div>
+                  <div className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-[#EAEAEA] group-[.active]:bg-[#111111] transition-colors duration-300"></div>
                 </div>
-                <div className="w-[42%] pl-6 sm:pl-8">
-                  <span className="font-mono text-[10px] text-[#666666] uppercase tracking-wider block mb-1">
+                <div className="w-[44%] sm:w-[42%] pl-2.5 sm:pl-8">
+                  <span className="font-mono text-[9px] sm:text-[10px] text-[#666666] uppercase tracking-wider block mb-0.5 sm:mb-1">
                     06 Trust
                   </span>
-                  <h3 className="font-sans text-sm sm:text-base font-semibold text-[#111111]">
+                  <h3 className="font-sans text-xs sm:text-base font-semibold text-[#111111]">
                     Corporate Integrity
                   </h3>
                   <p className="text-xs text-[#666666] mt-0.5 hidden md:block">

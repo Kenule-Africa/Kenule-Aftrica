@@ -58,7 +58,7 @@ export default function OraviaTestimonialsSection() {
   };
 
   return (
-    <section className="py-32 bg-[#111111] text-white relative overflow-hidden z-10">
+    <section className="py-20 sm:py-32 bg-[#111111] text-white relative overflow-hidden z-10 px-4 sm:px-8 lg:px-0">
       {/* Background Dots */}
       <div
         className="absolute inset-0 opacity-10 pointer-events-none"
@@ -68,11 +68,11 @@ export default function OraviaTestimonialsSection() {
         }}
       ></div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-16 items-center">
           {/* Left: Testimonial Carousel */}
           <div>
-            <div className="relative w-full min-h-[260px] flex flex-col justify-center">
+            <div className="relative w-full min-h-[220px] sm:min-h-[260px] flex flex-col justify-center">
               {slides.map((slide, index) => {
                 const isActive = index === currentIndex;
                 return (
@@ -84,19 +84,19 @@ export default function OraviaTestimonialsSection() {
                         : "opacity-0 absolute top-0 left-0 pointer-events-none -translate-x-4"
                     }`}
                   >
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tighter mb-8 leading-snug font-serif italic text-gray-100">
+                    <h2 className="text-xl sm:text-3xl md:text-4xl font-semibold tracking-tighter mb-6 sm:mb-8 leading-snug font-serif italic text-gray-100">
                       {slide.quote}
                     </h2>
 
-                    <div className="flex items-center gap-4">
-                      <div className="w-11 h-11 rounded-full bg-white/10 border border-white/20 flex items-center justify-center font-bold text-sm text-white">
+                    <div className="flex items-center gap-3.5 sm:gap-4">
+                      <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/10 border border-white/20 flex items-center justify-center font-bold text-xs sm:text-sm text-white shrink-0">
                         KA
                       </div>
                       <div>
-                        <div className="font-medium text-white text-base">
+                        <div className="font-medium text-white text-sm sm:text-base">
                           {slide.author}
                         </div>
-                        <div className="text-sm text-white/50">{slide.role}</div>
+                        <div className="text-xs sm:text-sm text-white/50">{slide.role}</div>
                       </div>
                     </div>
                   </div>
@@ -105,11 +105,11 @@ export default function OraviaTestimonialsSection() {
             </div>
 
             {/* Navigation Buttons */}
-            <div className="flex items-center gap-3 mt-10">
+            <div className="flex items-center gap-3 mt-8 sm:mt-10">
               <button
                 onClick={handlePrev}
                 disabled={currentIndex === 0}
-                className="group w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white hover:bg-white/10 transition-all disabled:opacity-20 disabled:cursor-not-allowed"
+                className="group w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white hover:bg-white/10 transition-all disabled:opacity-20 disabled:cursor-not-allowed active:scale-95"
                 aria-label="Previous quote"
               >
                 <ArrowLeft className="w-4 h-4" />
@@ -117,7 +117,7 @@ export default function OraviaTestimonialsSection() {
               <button
                 onClick={handleNext}
                 disabled={currentIndex === slides.length - 1}
-                className="group w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white hover:bg-white/10 transition-all disabled:opacity-20 disabled:cursor-not-allowed"
+                className="group w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white hover:bg-white/10 transition-all disabled:opacity-20 disabled:cursor-not-allowed active:scale-95"
                 aria-label="Next quote"
               >
                 <ArrowRight className="w-4 h-4" />
@@ -126,13 +126,13 @@ export default function OraviaTestimonialsSection() {
           </div>
 
           {/* Right: Live Synchronized Animated Metrics */}
-          <div className="flex flex-row md:flex-col justify-between gap-6 md:gap-0 md:space-y-12 border-t md:border-t-0 md:border-l border-white/10 pt-8 md:pt-0 md:pl-16">
+          <div className="grid grid-cols-3 md:flex md:flex-col justify-between gap-3 sm:gap-6 md:gap-0 md:space-y-12 border-t md:border-t-0 md:border-l border-white/10 pt-6 sm:pt-8 md:pt-0 md:pl-16">
             {stats[currentIndex].map((stat, i) => (
               <div key={i} className="transition-all duration-500 ease-out">
-                <div className="text-3xl sm:text-4xl font-bold mb-1 tracking-tight text-white">
+                <div className="text-2xl sm:text-4xl font-bold mb-0.5 sm:mb-1 tracking-tight text-white">
                   {stat.val}
                 </div>
-                <div className="text-xs sm:text-sm text-white/50 uppercase font-mono tracking-wider">
+                <div className="text-[10px] sm:text-sm text-white/50 uppercase font-mono tracking-wider">
                   {stat.lbl}
                 </div>
               </div>

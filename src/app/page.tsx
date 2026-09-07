@@ -12,7 +12,7 @@ import OraviaFooter from "@/components/sections/OraviaFooter";
 export default function Home() {
   return (
     <main className="w-full relative bg-[#FAFAFA] min-h-screen">
-      {/* Fixed Backgrounds matching generated-page (3).html */}
+      {/* Fixed Technical Grid & 3D Africa Matrix Background */}
       <div className="fixed inset-0 z-0 technical-grid pointer-events-none"></div>
       <ThreeShaderCanvas />
 

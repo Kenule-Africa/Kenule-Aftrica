@@ -11,8 +11,8 @@ export default function ThreeShaderCanvas() {
     if (!container) return;
 
     try {
-      const canvas = document.createElement("canvas");
-      const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+      const testCanvas = document.createElement("canvas");
+      const gl = testCanvas.getContext("webgl") || testCanvas.getContext("experimental-webgl");
       if (!gl) return;
     } catch {
       return;
@@ -20,221 +20,362 @@ export default function ThreeShaderCanvas() {
 
     const scene = new THREE.Scene();
 
-    const camera = new THREE.PerspectiveCamera(
-      45,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      100
-    );
+    const camera = new THREE.PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.1, 100);
     camera.position.set(0, 0, 22);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    const renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      alpha: true,
+      powerPreference: "high-performance",
+    });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
-    const objectGroup = new THREE.Group();
-    scene.add(objectGroup);
+    const africaGroup = new THREE.Group();
+    scene.add(africaGroup);
 
-    // Precise African Continent Contour (Normalized 2D Coordinates)
-    const africaContour: [number, number][] = [
-      [-0.45, 0.95],  // Morocco / Tangier
-      [-0.20, 0.97],  // Algeria coast
-      [0.05, 0.98],   // Algiers
-      [0.28, 0.98],   // Tunisia (Cape Angela)
-      [0.32, 0.88],   // Gulf of Gabes
-      [0.45, 0.82],   // Tripoli / Libya
-      [0.58, 0.80],   // Gulf of Sidra
-      [0.72, 0.82],   // Benghazi / Cyrenaica
-      [0.85, 0.78],   // Alexandria / Egypt
-      [0.90, 0.70],   // Suez / Sinai
-      [0.92, 0.52],   // Red Sea (Sudan)
-      [1.02, 0.35],   // Eritrea
-      [1.12, 0.28],   // Djibouti / Bab-el-Mandeb
-      [1.38, 0.22],   // Horn of Africa (Ras Hafun, Somalia)
-      [1.25, 0.05],   // Mogadishu
-      [1.08, -0.15],  // Kismayo
-      [0.95, -0.32],  // Kenya / Mombasa
-      [0.90, -0.52],  // Tanzania / Dar es Salaam
-      [0.85, -0.72],  // Mozambique / Beira
-      [0.78, -0.92],  // Maputo
-      [0.68, -1.08],  // Durban, South Africa
-      [0.48, -1.25],  // Port Elizabeth
-      [0.32, -1.28],  // Cape Agulhas / Cape of Good Hope
-      [0.22, -1.18],  // Cape Town
-      [0.15, -0.95],  // Namibia (Luderitz)
-      [0.18, -0.72],  // Walvis Bay
-      [0.22, -0.48],  // Angola (Namibe)
-      [0.25, -0.28],  // Luanda
-      [0.18, -0.10],  // Congo River mouth
-      [0.12, 0.08],   // Gabon / Libreville
-      [0.10, 0.18],   // Cameroon / Douala
-      [0.02, 0.18],   // Niger Delta, Nigeria
-      [-0.15, 0.18],  // Lagos, Nigeria
-      [-0.32, 0.16],  // Ghana / Accra
-      [-0.52, 0.18],  // Ivory Coast / Abidjan
-      [-0.72, 0.22],  // Liberia / Monrovia
-      [-0.85, 0.32],  // Sierra Leone / Freetown
-      [-0.92, 0.45],  // Guinea-Bissau
-      [-0.95, 0.58],  // Dakar, Senegal (Cap-Vert)
-      [-0.88, 0.72],  // Mauritania (Nouakchott)
-      [-0.72, 0.82],  // Western Sahara
-      [-0.58, 0.90],  // Agadir, Morocco
-      [-0.45, 0.95],  // Close loop
+    // High-Precision Africa Geographic Contour Coordinates
+    const rawAfricaContour: [number, number][] = [
+      [-5.8, 35.8],   // Tangier / Gibraltar
+      [-0.6, 35.7],   // Oran
+      [3.05, 36.75],  // Algiers
+      [7.76, 36.9],   // Annaba
+      [9.85, 37.34],  // Cape Angela, Tunisia (North tip)
+      [11.04, 37.05], // Cape Bon
+      [10.6, 35.8],   // Sousse
+      [10.1, 33.88],  // Gulf of Gabes
+      [11.1, 33.5],   // Djerba
+      [13.19, 32.9],  // Tripoli
+      [15.1, 32.38],  // Misrata
+      [18.57, 30.5],  // Ras Lanuf
+      [20.06, 32.1],  // Benghazi
+      [22.64, 32.76], // Derna
+      [25.15, 31.55], // Sallum, Egypt
+      [29.92, 31.2],  // Alexandria
+      [31.81, 31.52], // Nile Delta
+      [32.3, 31.26],  // Port Said
+      [32.55, 29.97], // Suez / Red Sea
+      [33.81, 27.26], // Hurghada
+      [35.65, 23.95], // Marsa Alam
+      [37.22, 19.62], // Port Sudan
+      [39.47, 15.61], // Massawa
+      [43.32, 12.48], // Bab-el-Mandeb
+      [43.14, 11.59], // Djibouti
+      [45.01, 10.44], // Berbera
+      [49.18, 11.28], // Bosaso
+      [51.28, 11.83], // Cape Guardafui (Horn tip)
+      [51.41, 10.43], // Ras Hafun
+      [48.53, 5.35],  // Hobyo
+      [45.34, 2.04],  // Mogadishu
+      [42.55, -0.36], // Kismayo
+      [40.9, -2.27],  // Lamu, Kenya
+      [39.67, -4.05], // Mombasa
+      [39.28, -6.82], // Dar es Salaam
+      [40.18, -10.27],// Mtwara
+      [40.52, -12.97],// Pemba, Mozambique
+      [40.74, -15.03],// Mozambique Island
+      [36.88, -17.88],// Quelimane
+      [34.84, -19.83],// Beira
+      [35.38, -23.87],// Inhambane
+      [32.58, -25.97],// Maputo
+      [31.03, -29.86],// Durban, South Africa
+      [27.91, -33.02],// East London
+      [25.62, -33.96],// Port Elizabeth
+      [20.01, -34.83],// Cape Agulhas (South tip)
+      [18.47, -34.35],// Cape of Good Hope
+      [18.42, -33.92],// Cape Town
+      [17.94, -33.01],// Saldanha Bay
+      [15.16, -26.65],// Luderitz, Namibia
+      [14.5, -22.95], // Walvis Bay
+      [11.75, -17.26],// Kunene River mouth
+      [13.23, -8.84], // Luanda, Angola
+      [12.37, -6.13], // Congo River mouth
+      [11.86, -4.78], // Pointe-Noire
+      [8.78, -0.63],  // Cape Lopez, Gabon
+      [9.45, 0.39],   // Libreville
+      [9.7, 4.05],    // Douala, Cameroon
+      [8.32, 4.96],   // Calabar, Nigeria
+      [7.17, 4.45],   // Port Harcourt
+      [5.35, 5.35],   // Niger Delta
+      [3.39, 6.45],   // Lagos, Nigeria
+      [2.43, 6.37],   // Cotonou, Benin
+      [1.22, 6.13],   // Lome, Togo
+      [-0.19, 5.55],  // Accra, Ghana
+      [-2.09, 4.74],  // Cape Three Points
+      [-3.98, 5.32],  // Abidjan, Ivory Coast
+      [-7.71, 4.37],  // Cape Palmas, Liberia
+      [-10.8, 6.31],  // Monrovia
+      [-13.29, 8.49], // Freetown, Sierra Leone
+      [-13.71, 9.51], // Conakry, Guinea
+      [-15.58, 11.86],// Bissau
+      [-16.58, 13.45],// Banjul, Gambia
+      [-17.52, 14.72],// Dakar / Cap-Vert (West tip)
+      [-16.5, 16.03], // Saint-Louis, Senegal
+      [-16.03, 18.08],// Nouakchott, Mauritania
+      [-17.04, 20.77],// Nouadhibou
+      [-15.93, 23.72],// Dakhla
+      [-13.27, 27.15],// Laayoune
+      [-9.6, 30.42],  // Agadir, Morocco
+      [-9.77, 31.51], // Essaouira
+      [-7.59, 33.57], // Casablanca
+      [-6.84, 34.02], // Rabat
+      [-5.8, 35.8],   // Tangier
     ];
 
-    // Point in polygon test
-    function isInsideContour(x: number, y: number): boolean {
-      let inside = false;
-      for (let i = 0, j = africaContour.length - 1; i < africaContour.length; j = i++) {
-        const xi = africaContour[i][0];
-        const yi = africaContour[i][1];
-        const xj = africaContour[j][0];
-        const yj = africaContour[j][1];
+    const rawMadagascarContour: [number, number][] = [
+      [49.3, -11.95],
+      [50.28, -14.9],
+      [49.74, -15.44],
+      [49.41, -18.15],
+      [48.01, -22.14],
+      [46.99, -25.03],
+      [45.16, -25.6],
+      [43.67, -23.35],
+      [44.28, -20.29],
+      [44.02, -18.06],
+      [46.31, -15.72],
+      [48.45, -13.68],
+      [49.3, -11.95],
+    ];
 
-        const intersect = yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi;
+    const centerLon = 18.0;
+    const centerLat = 2.0;
+    const mapScale = 0.125;
+
+    const mapAfricaPoly = rawAfricaContour.map(([lon, lat]) => [
+      (lon - centerLon) * mapScale,
+      (lat - centerLat) * mapScale,
+    ]);
+
+    const mapMadaPoly = rawMadagascarContour.map(([lon, lat]) => [
+      (lon - centerLon) * mapScale,
+      (lat - centerLat) * mapScale,
+    ]);
+
+    function isInsidePoly(px: number, py: number, polygon: number[][]): boolean {
+      let inside = false;
+      for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+        const xi = polygon[i][0];
+        const yi = polygon[i][1];
+        const xj = polygon[j][0];
+        const yj = polygon[j][1];
+
+        const intersect = yi > py !== yj > py && px < ((xj - xi) * (py - yi)) / (yj - yi) + xi;
         if (intersect) inside = !inside;
       }
       return inside;
     }
 
-    // Generate Volumetric 3D African Continent Particles
     const positions: number[] = [];
-    const scale = 5.2;
+    const scatterPositions: number[] = [];
+    const scatterPhases: number[] = [];
+    const colors: number[] = [];
+    const sizes: number[] = [];
+    const layerIndices: number[] = [];
 
-    // 1. Dense Interior and Topography Grid
-    const step = 0.045;
-    for (let x = -1.05; x <= 1.45; x += step) {
-      for (let y = -1.35; y <= 1.05; y += step) {
-        if (isInsideContour(x, y)) {
-          // Elevation curvature: Central plateau & East African Rift higher
-          const distFromCenter = Math.sqrt(x * x + y * y);
-          const baseZ = Math.sin(x * 2.0) * Math.cos(y * 2.0) * 0.4;
-          
-          // Layer depth (layered sandwich for thick 3D topography)
-          const layers = 6;
-          for (let l = 0; l < layers; l++) {
-            const zOffset = (l - (layers - 1) / 2) * 0.28 + (Math.random() - 0.5) * 0.12;
-            const jitterX = (Math.random() - 0.5) * step * 0.6;
-            const jitterY = (Math.random() - 0.5) * step * 0.6;
+    // Configuration for the 3D extruded dot-matrix pillars
+    const GRID_STEP = 0.21;
+    const EXTRUDE_LAYERS = 10;
+    const LAYER_HEIGHT_STEP = 0.14; // Vertical height spacing of dot pillars
 
-            positions.push(
-              (x + jitterX) * scale,
-              (y + jitterY) * scale,
-              (baseZ + zOffset) * scale * 0.4
-            );
+    // Helper to generate scattered 3D cloud coordinates around the target
+    const getScatterCoord = (tx: number, ty: number, tz: number) => {
+      // Broad 3D dispersion nebula
+      const angle = Math.random() * Math.PI * 2;
+      const radius = 2.5 + Math.random() * 8.5;
+      const sx = tx + Math.cos(angle) * radius + (Math.random() - 0.5) * 4.0;
+      const sy = ty + Math.sin(angle) * radius + (Math.random() - 0.5) * 4.0;
+      const sz = tz + (Math.random() - 0.5) * 10.0;
+      return [sx, sy, sz];
+    };
+
+    // 1. Regular 2D Grid Extrusion over Africa & Madagascar
+    const minX = -5.2;
+    const maxX = 5.2;
+    const minY = -5.0;
+    const maxY = 5.0;
+
+    for (let x = minX; x <= maxX; x += GRID_STEP) {
+      for (let y = minY; y <= maxY; y += GRID_STEP) {
+        const inAfrica = isInsidePoly(x, y, mapAfricaPoly);
+        const inMada = isInsidePoly(x, y, mapMadaPoly);
+
+        if (inAfrica || inMada) {
+          // Extrude downward along Z
+          for (let k = 0; k < EXTRUDE_LAYERS; k++) {
+            const z = -k * LAYER_HEIGHT_STEP;
+            positions.push(x, y, z);
+            layerIndices.push(k);
+
+            const [sx, sy, sz] = getScatterCoord(x, y, z);
+            scatterPositions.push(sx, sy, sz);
+            scatterPhases.push(Math.random() * Math.PI * 2);
+
+            if (k === 0) {
+              // Top surface layer: Jet black, solid dots
+              colors.push(0.04, 0.04, 0.04);
+              sizes.push(4.2);
+            } else {
+              // Extruded side pillars: Depth gradient fading to slate/gray
+              const depthFrac = k / (EXTRUDE_LAYERS - 1);
+              const tone = 0.12 + depthFrac * 0.48; // #1E1E1E down to #999999
+              colors.push(tone, tone, tone);
+              sizes.push(3.6 - depthFrac * 1.0);
+            }
           }
         }
       }
     }
 
-    // 2. High-Density Perimeter Coastline Ribbon
-    for (let i = 0; i < africaContour.length - 1; i++) {
-      const p1 = africaContour[i];
-      const p2 = africaContour[i + 1];
-      const segments = 16;
-      for (let s = 0; s < segments; s++) {
-        const t = s / segments;
-        const x = p1[0] + (p2[0] - p1[0]) * t;
-        const y = p1[1] + (p2[1] - p1[1]) * t;
-        for (let z = -0.7; z <= 0.7; z += 0.22) {
-          positions.push(
-            x * scale + (Math.random() - 0.5) * 0.04,
-            y * scale + (Math.random() - 0.5) * 0.04,
-            z * scale * 0.4
-          );
+    // 2. High-Density Coastline Perimeter Extrusion Columns
+    const addCoastlineColumns = (poly: number[][]) => {
+      for (let i = 0; i < poly.length - 1; i++) {
+        const p1 = poly[i];
+        const p2 = poly[i + 1];
+        const segDist = Math.hypot(p2[0] - p1[0], p2[1] - p1[1]);
+        const count = Math.max(3, Math.ceil(segDist / (GRID_STEP * 0.75)));
+
+        for (let b = 0; b < count; b++) {
+          const t = b / count;
+          const cx = p1[0] + (p2[0] - p1[0]) * t;
+          const cy = p1[1] + (p2[1] - p1[1]) * t;
+
+          for (let k = 0; k < EXTRUDE_LAYERS; k++) {
+            const z = -k * LAYER_HEIGHT_STEP;
+            positions.push(cx, cy, z);
+            layerIndices.push(k);
+
+            const [sx, sy, sz] = getScatterCoord(cx, cy, z);
+            scatterPositions.push(sx, sy, sz);
+            scatterPhases.push(Math.random() * Math.PI * 2);
+
+            if (k === 0) {
+              colors.push(0.02, 0.02, 0.02);
+              sizes.push(4.4);
+            } else {
+              const depthFrac = k / (EXTRUDE_LAYERS - 1);
+              const tone = 0.1 + depthFrac * 0.45;
+              colors.push(tone, tone, tone);
+              sizes.push(3.8 - depthFrac * 1.0);
+            }
+          }
         }
       }
-    }
+    };
 
-    // 3. Madagascar Island
-    for (let my = -0.45; my >= -0.92; my -= 0.04) {
-      const mx = 1.15 + (my + 0.65) * 0.35;
-      for (let w = -0.06; w <= 0.06; w += 0.03) {
-        for (let mz = -0.4; mz <= 0.4; mz += 0.2) {
-          positions.push(
-            (mx + w + (Math.random() - 0.5) * 0.02) * scale,
-            (my + (Math.random() - 0.5) * 0.02) * scale,
-            mz * scale * 0.35
-          );
-        }
-      }
-    }
-
-    // 4. Kenule Headquarters Spotlight Node (Jos, Plateau State, Nigeria: ~0.08, 0.28)
-    const hqX = 0.08 * scale;
-    const hqY = 0.28 * scale;
-    for (let k = 0; k < 80; k++) {
-      const theta = Math.random() * Math.PI * 2;
-      const rad = Math.random() * 0.5;
-      positions.push(
-        hqX + Math.cos(theta) * rad,
-        hqY + Math.sin(theta) * rad,
-        (Math.random() - 0.5) * 1.8
-      );
-    }
+    addCoastlineColumns(mapAfricaPoly);
+    addCoastlineColumns(mapMadaPoly);
 
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+    geometry.setAttribute("scatterPos", new THREE.Float32BufferAttribute(scatterPositions, 3));
+    geometry.setAttribute("scatterPhase", new THREE.Float32BufferAttribute(scatterPhases, 1));
+    geometry.setAttribute("customColor", new THREE.Float32BufferAttribute(colors, 3));
+    geometry.setAttribute("customSize", new THREE.Float32BufferAttribute(sizes, 1));
+    geometry.setAttribute("layerIndex", new THREE.Float32BufferAttribute(layerIndices, 1));
 
-    // Custom Shaders for Classic Technical African Matrix
+    // Custom 3D Dot Matrix Shader with Scatter & Magnetic Cursor Coalescence
     const vertexShader = `
+      attribute vec3 scatterPos;
+      attribute float scatterPhase;
+      attribute vec3 customColor;
+      attribute float customSize;
+      attribute float layerIndex;
+
+      varying vec3 vColor;
+      varying float vLayer;
+      varying float vWave;
+      varying float vCohesion;
+
       uniform float uTime;
-      uniform float uDistortion;
-      uniform float uSize;
       uniform vec2 uMouse;
-      varying float vZ;
-      varying float vNoise;
+      uniform float uMouseActive;
 
       void main() {
-          vec3 pos = position;
-          
-          // Organic breathing waves across the continent
-          float wave = sin(pos.x * 0.6 + uTime * 1.2) * cos(pos.y * 0.6 + uTime * 0.9) * 0.35;
-          pos.z += wave;
+          vColor = customColor;
+          vLayer = layerIndex;
 
-          // Interactive cursor repulsion / tilt
-          float dist = distance(uMouse * 12.0, pos.xy);
-          float interaction = smoothstep(6.5, 0.0, dist);
-          pos.z += interaction * 1.8;
+          // 1. Calculate scattered organic 3D drift position
+          vec3 floatingScatter = scatterPos;
+          floatingScatter.x += sin(uTime * 0.7 + scatterPhase) * 0.85;
+          floatingScatter.y += cos(uTime * 0.6 + scatterPhase * 1.4) * 0.85;
+          floatingScatter.z += sin(uTime * 0.8 + scatterPhase * 0.8) * 0.65;
 
-          vZ = pos.z;
-          vNoise = wave;
+          // 2. Cursor Magnetic Field Calculation
+          // Map mouse coordinates to Africa group local space
+          vec2 localCursor = uMouse * vec2(4.8, 3.8);
+          float distToCursor = distance(position.xy, localCursor);
 
-          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+          // Local attraction radius around cursor
+          float localAttract = smoothstep(5.8, 0.4, distToCursor);
+
+          // Cohesion blend: scattered by default, assembled when cursor is positioned
+          float targetCohesion = clamp(uMouseActive * 0.45 + localAttract * 0.85, 0.0, 1.0);
+          float easedCohesion = smoothstep(0.0, 1.0, targetCohesion);
+          vCohesion = easedCohesion;
+
+          // 3. Smooth Magnetic Interpolation: Scatter -> Assembled Africa Structure
+          vec3 assembled = mix(floatingScatter, position, easedCohesion);
+
+          // 4. Kinetic Wave & Pulse Effects on Assembled Particles
+          float w1 = sin(assembled.x * 0.85 + assembled.y * 0.65 + uTime * 1.6) * 0.22;
+          float w2 = cos(assembled.x * 0.55 - assembled.y * 0.75 + uTime * 1.2) * 0.15;
+          float autoWave = (w1 + w2) * easedCohesion;
+          vWave = autoWave;
+
+          float depthDamping = 1.0 - (layerIndex * 0.05);
+          assembled.z += autoWave * depthDamping;
+
+          // Cursor interactive ripple when assembled
+          float cursorRipple = sin(distToCursor * 2.8 - uTime * 3.2) * 0.24 * localAttract * easedCohesion;
+          assembled.z += cursorRipple * depthDamping;
+
+          vec4 mvPosition = modelViewMatrix * vec4(assembled, 1.0);
           gl_Position = projectionMatrix * mvPosition;
-          gl_PointSize = uSize * (26.0 / -mvPosition.z);
+
+          // 5. Dynamic particle sizing (subtle dust when scattered, bold defined dots when assembled)
+          float activeSize = mix(customSize * 0.75, customSize * 1.08, easedCohesion);
+          activeSize *= (1.0 + autoWave * 0.2);
+          gl_PointSize = activeSize * (26.0 / -mvPosition.z);
       }
     `;
 
     const fragmentShader = `
-      uniform vec3 uColorPrimary;
-      uniform vec3 uColorAccent;
-      varying float vZ;
-      varying float vNoise;
+      varying vec3 vColor;
+      varying float vLayer;
+      varying float vWave;
+      varying float vCohesion;
 
       void main() {
-          vec2 center = gl_PointCoord - vec2(0.5);
-          float dist = length(center);
+          vec2 coord = gl_PointCoord - vec2(0.5);
+          float dist = length(coord);
           if (dist > 0.48) discard;
 
-          // Smooth radial dot falloff
-          float alpha = smoothstep(0.48, 0.1, dist);
+          // Crisp circular dot with smooth anti-aliased edge
+          float alpha = smoothstep(0.48, 0.36, dist);
 
-          // Blend from deep obsidian to warm golden amber on elevated crests
-          vec3 color = mix(uColorPrimary, uColorAccent, clamp((vZ + 1.2) * 0.35, 0.0, 1.0));
-          
-          gl_FragColor = vec4(color, alpha * 0.85);
+          // Particles become solid and bold as they come together
+          float cohesionAlpha = mix(0.4, 1.0, vCohesion);
+          float layerAlpha = 1.0 - (vLayer * 0.035);
+
+          vec3 finalColor = vColor;
+          if (vLayer < 0.5) {
+            // Pure Obsidian black top
+            finalColor = vec3(0.02, 0.02, 0.02);
+          } else {
+            float toneShift = vWave * 0.08;
+            finalColor = clamp(vColor - vec3(toneShift), 0.05, 0.85);
+          }
+
+          gl_FragColor = vec4(finalColor, alpha * layerAlpha * cohesionAlpha);
       }
     `;
 
     const uniforms = {
       uTime: { value: 0 },
-      uDistortion: { value: 0.2 },
-      uSize: { value: 2.1 },
-      uColorPrimary: { value: new THREE.Color("#111827") }, // Deep obsidian
-      uColorAccent: { value: new THREE.Color("#f0b90b") },  // Warm African gold
       uMouse: { value: new THREE.Vector2(0, 0) },
+      uMouseActive: { value: 0.0 },
     };
 
     const material = new THREE.ShaderMaterial({
@@ -247,39 +388,50 @@ export default function ThreeShaderCanvas() {
     });
 
     const points = new THREE.Points(geometry, material);
-    objectGroup.add(points);
+    africaGroup.add(points);
 
-    // Initial 3D tilt
-    objectGroup.rotation.x = 0.25;
-    objectGroup.rotation.y = -0.2;
+    // Exact 3D Perspective Rotation matching the reference image:
+    africaGroup.rotation.x = 0.55;
+    africaGroup.rotation.y = -0.32;
+    africaGroup.rotation.z = -0.05;
 
     let time = 0;
     let mouseX = 0;
     let mouseY = 0;
+    let targetMouseActive = 0.0;
+    let currentMouseActive = 0.0;
+    let mouseIdleTimer: NodeJS.Timeout | null = null;
 
     const handleMouseMove = (e: MouseEvent) => {
       mouseX = (e.clientX / window.innerWidth) * 2 - 1;
       mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-      uniforms.uMouse.value.x += (mouseX - uniforms.uMouse.value.x) * 0.04;
-      uniforms.uMouse.value.y += (mouseY - uniforms.uMouse.value.y) * 0.04;
+      targetMouseActive = 1.0;
+
+      if (mouseIdleTimer) clearTimeout(mouseIdleTimer);
+      // Keep active while cursor is moving / present
+      mouseIdleTimer = setTimeout(() => {
+        targetMouseActive = 0.4; // Soft resting cohesion
+      }, 2500);
     };
 
-    document.addEventListener("mousemove", handleMouseMove);
+    const handleMouseLeave = () => {
+      targetMouseActive = 0.0;
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseleave", handleMouseLeave);
 
     const adjustLayout = () => {
       const w = window.innerWidth;
       if (w < 768) {
-        // Mobile layout: centered subtle background
-        objectGroup.position.set(0, 1.5, -4);
-        objectGroup.scale.set(0.68, 0.68, 0.68);
+        africaGroup.position.set(0.5, 0.5, -4);
+        africaGroup.scale.set(0.75, 0.75, 0.75);
       } else if (w < 1200) {
-        // Tablet layout
-        objectGroup.position.set(3.5, 1.8, -2);
-        objectGroup.scale.set(0.85, 0.85, 0.85);
+        africaGroup.position.set(1.2, 0.8, -1.5);
+        africaGroup.scale.set(0.9, 0.9, 0.9);
       } else {
-        // Large desktop layout: floating prominently on the hero right
-        objectGroup.position.set(4.8, 1.2, 0);
-        objectGroup.scale.set(1.05, 1.05, 1.05);
+        africaGroup.position.set(1.8, 0.6, 0);
+        africaGroup.scale.set(1.05, 1.05, 1.05);
       }
     };
 
@@ -295,39 +447,50 @@ export default function ThreeShaderCanvas() {
 
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      objectGroup.rotation.y = -0.2 + scrollY * 0.0006;
-      objectGroup.rotation.x = 0.25 + scrollY * 0.0003;
-      
+      africaGroup.rotation.y = -0.32 + scrollY * 0.0003;
+      africaGroup.rotation.x = 0.55 + scrollY * 0.0002;
+
       const w = window.innerWidth;
-      const baseY = w < 768 ? 1.5 : 1.2;
-      objectGroup.position.y = baseY - scrollY * 0.004;
+      const baseY = w < 768 ? 0.5 : (w < 1200 ? 0.8 : 0.6);
+      africaGroup.position.y = baseY - scrollY * 0.003;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
 
-    let animationId: number;
+    let animId: number;
+
     function animate() {
-      animationId = requestAnimationFrame(animate);
+      animId = requestAnimationFrame(animate);
       time += 0.012;
-      
-      // Gentle floating oscillation
-      objectGroup.rotation.y += Math.sin(time * 0.8) * 0.0008;
-      objectGroup.position.z = Math.sin(time * 0.5) * 0.3;
-      
+
+      // Smooth lerp for global mouse active state
+      currentMouseActive += (targetMouseActive - currentMouseActive) * 0.05;
+
+      // Subtle, elegant floating motion + responsive cursor parallax
+      africaGroup.rotation.y = -0.32 + Math.sin(time * 0.4) * 0.03 + mouseX * 0.12;
+      africaGroup.rotation.x = 0.55 + Math.cos(time * 0.35) * 0.02 - mouseY * 0.1;
+
       uniforms.uTime.value = time;
-      camera.position.x += (mouseX * 0.8 - camera.position.x) * 0.03;
-      camera.position.y += (mouseY * 0.8 - camera.position.y) * 0.03;
+      uniforms.uMouse.value.x = mouseX;
+      uniforms.uMouse.value.y = mouseY;
+      uniforms.uMouseActive.value = currentMouseActive;
+
+      camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.03;
+      camera.position.y += (mouseY * 0.5 - camera.position.y) * 0.03;
       camera.lookAt(0, 0, 0);
+
       renderer.render(scene, camera);
     }
     animate();
 
     return () => {
-      cancelAnimationFrame(animationId);
-      document.removeEventListener("mousemove", handleMouseMove);
+      cancelAnimationFrame(animId);
+      if (mouseIdleTimer) clearTimeout(mouseIdleTimer);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseleave", handleMouseLeave);
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("scroll", handleScroll);
-      if (container && renderer.domElement) {
+      if (container && renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
       renderer.dispose();
@@ -345,4 +508,3 @@ export default function ThreeShaderCanvas() {
     />
   );
 }
-

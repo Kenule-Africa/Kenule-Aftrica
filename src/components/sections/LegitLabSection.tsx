@@ -14,7 +14,6 @@ import {
   Users,
   Clock,
   MapPin,
-  Sparkles,
 } from "lucide-react";
 
 export default function LegitLabSection() {
@@ -148,7 +147,7 @@ export default function LegitLabSection() {
             <span>Jos, Plateau State (Hybrid)</span>
           </div>
           <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-[#14f7b0]">
-            <Sparkles className="w-3.5 h-3.5" />
+            <CheckCircle2 className="w-3.5 h-3.5" />
             <span>100% Free Tuition</span>
           </div>
         </div>

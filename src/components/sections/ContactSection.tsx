@@ -10,7 +10,6 @@ import {
   Linkedin,
   Twitter,
   Building2,
-  Sparkles,
 } from "lucide-react";
 
 export default function ContactSection() {

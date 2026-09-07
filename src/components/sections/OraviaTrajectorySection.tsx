@@ -132,15 +132,15 @@ export default function OraviaTrajectorySection() {
     <section
       ref={sectionRef}
       id="legitlab"
-      className="py-24 px-6 md:px-12 lg:px-20 border-b border-[#EAEAEA]/80 bg-[#FAFAFA] relative z-10 scroll-mt-20"
+      className="py-16 sm:py-24 px-4 sm:px-8 lg:px-0 border-b border-[#EAEAEA]/80 bg-[#FAFAFA] relative z-10 scroll-mt-20"
     >
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-16 lg:mb-20 gap-8">
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-12 sm:mb-16 lg:mb-20 gap-6 sm:gap-8">
           <div className="max-w-2xl">
-            <h2 className="font-sans text-3xl sm:text-4xl font-semibold text-[#111111] tracking-tight mb-4">
+            <h2 className="font-sans text-2xl sm:text-4xl font-semibold text-[#111111] tracking-tight mb-3 sm:mb-4">
               How LegitLab Accelerates African Careers
             </h2>
-            <p className="font-sans text-[#666666] text-base sm:text-lg leading-relaxed font-light">
+            <p className="font-sans text-[#666666] text-sm sm:text-lg leading-relaxed font-light">
               LegitLab equips youth in Jos and across Nigeria with verified, high-income digital proficiencies,
               completely free of charge.
             </p>
@@ -150,7 +150,7 @@ export default function OraviaTrajectorySection() {
             href="https://forms.gle/PzbnPTfnHMCd79uj8"
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#111111] text-white font-semibold text-xs tracking-wider uppercase hover:bg-black transition-all shadow-sm"
+            className="w-full sm:w-auto group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#111111] text-white font-semibold text-xs tracking-wider uppercase hover:bg-black transition-all shadow-sm active:scale-[0.98]"
           >
             <span>Apply for Next Cohort</span>
             <ExternalLink className="w-3.5 h-3.5" />
@@ -170,19 +170,19 @@ export default function OraviaTrajectorySection() {
           <div
             ref={gridRef}
             id="def-grid"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-x-8 gap-y-12 relative z-10"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-x-6 sm:gap-x-8 gap-y-8 sm:gap-y-12 relative z-10"
           >
             {stepsData.map((step, index) => (
               <div
                 key={index}
-                className="def-step group flex flex-col gap-4 cursor-pointer"
+                className="def-step group flex flex-col gap-3 sm:gap-4 cursor-pointer p-5 sm:p-0 rounded-2xl sm:rounded-none bg-white sm:bg-transparent shadow-md sm:shadow-none"
                 data-index={index}
               >
                 <div className="flex items-center gap-4">
-                  <div className="def-num w-9 h-9 bg-white border border-[#EAEAEA] rounded flex items-center justify-center text-[10px] font-mono font-medium text-[#666666] shadow-sm transition-all duration-500 z-10">
+                  <div className="def-num w-9 h-9 bg-white rounded-lg flex items-center justify-center text-[10px] font-mono font-medium text-[#666666] shadow-sm transition-all duration-500 z-10">
                     {step.num}
                   </div>
-                  <div className="h-px flex-1 bg-[#EAEAEA] lg:hidden"></div>
+                  <div className="h-px flex-1 bg-[#EAEAEA]/80 lg:hidden"></div>
                 </div>
                 <div className="def-content transition-all duration-500">
                   <h3 className="font-sans text-sm font-semibold text-[#111111] mb-1.5">

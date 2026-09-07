@@ -1,16 +1,22 @@
-import { CircleDashed } from "lucide-react";
+import Image from "next/image";
 
 export default function OraviaFooter() {
   return (
-    <footer className="bg-white py-20 px-6 md:px-12 lg:px-20 z-10 relative border-t border-[#EAEAEA]">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12">
+    <footer className="bg-white py-14 sm:py-20 px-4 sm:px-8 lg:px-0 z-10 relative border-t border-[#EAEAEA]">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-10 sm:gap-12">
         {/* Brand & Legal */}
         <div className="max-w-xs space-y-4">
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 bg-[#111111] rounded-sm flex items-center justify-center text-white">
-              <CircleDashed className="w-3 h-3" />
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center shrink-0">
+              <Image
+                src="/assets/logo.png"
+                alt="Kenule Africa Logo"
+                width={36}
+                height={36}
+                className="w-full h-full object-contain rounded-full"
+              />
             </div>
-            <span className="font-bold text-sm tracking-tight text-[#111111]">
+            <span className="font-bold text-base tracking-tight text-[#111111]">
               KENULE AFRICA
             </span>
           </div>
@@ -26,7 +32,7 @@ export default function OraviaFooter() {
         </div>
 
         {/* Links Grid */}
-        <div className="flex flex-wrap gap-16">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 sm:gap-16">
           <div className="space-y-4">
             <h4 className="text-xs font-bold text-[#111111] uppercase tracking-wider">
               Ventures
