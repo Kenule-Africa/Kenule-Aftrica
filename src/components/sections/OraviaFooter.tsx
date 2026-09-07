@@ -55,6 +55,16 @@ export default function OraviaFooter() {
               </li>
               <li>
                 <a
+                  href="https://mykedu.com.ng"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#111111] transition-colors"
+                >
+                  Kédu Marketplace ↗
+                </a>
+              </li>
+              <li>
+                <a
                   href="https://forms.gle/PzbnPTfnHMCd79uj8"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -77,6 +87,11 @@ export default function OraviaFooter() {
                 </a>
               </li>
               <li>
+                <a href="#community" className="hover:text-[#111111] transition-colors">
+                  Builders Circle
+                </a>
+              </li>
+              <li>
                 <a href="#lifecycle" className="hover:text-[#111111] transition-colors">
                   Methodology
                 </a>
@@ -94,6 +109,17 @@ export default function OraviaFooter() {
               Connect
             </h4>
             <ul className="space-y-2 text-xs text-[#666666]">
+              <li>
+                <a
+                  href="https://chat.whatsapp.com/Hhu3IVicy470u0yVdWjF8J?mode=gi_t"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#111111] font-semibold hover:underline flex items-center gap-1"
+                >
+                  <span>Builders Circle (WhatsApp)</span>
+                  <span>↗</span>
+                </a>
+              </li>
               <li>
                 <a
                   href="https://x.com/kenuleafrica"

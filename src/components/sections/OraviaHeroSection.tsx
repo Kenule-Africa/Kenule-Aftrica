@@ -8,24 +8,28 @@ export default function OraviaHeroSection() {
       category: "Fintech Rails",
       logo: "/assets/depay.png",
       href: "#ventures",
+      isExternal: false,
     },
     {
       name: "LegitLab",
       category: "Talent Academy",
       logo: "/assets/legitlab.png",
       href: "#ventures",
+      isExternal: false,
     },
     {
       name: "Jos Tech Expo",
       category: "Innovation Summit",
       logo: "/assets/joetechexpo.png",
       href: "#ventures",
+      isExternal: false,
     },
     {
-      name: "Kenule HQ",
-      category: "Parent Studio",
-      logo: "/assets/logo.png",
-      href: "#about",
+      name: "Kédu",
+      category: "Commerce Rails",
+      logo: "/assets/kude.png",
+      href: "https://mykedu.com.ng",
+      isExternal: true,
     },
   ];
 
@@ -233,6 +237,8 @@ export default function OraviaHeroSection() {
               <a
                 key={item.name}
                 href={item.href}
+                target={item.isExternal ? "_blank" : undefined}
+                rel={item.isExternal ? "noopener noreferrer" : undefined}
                 className="flex items-center gap-3 sm:gap-3.5 group transition-all duration-300 hover:opacity-100 opacity-90"
               >
                 <div className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shrink-0">

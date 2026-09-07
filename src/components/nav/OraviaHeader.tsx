@@ -70,6 +70,12 @@ export default function OraviaHeader() {
               Ventures
             </a>
             <a
+              href="#community"
+              className="font-sans text-xs font-medium text-[#666666] hover:text-[#111111] transition-colors"
+            >
+              Community
+            </a>
+            <a
               href="#lifecycle"
               className="font-sans text-xs font-medium text-[#666666] hover:text-[#111111] transition-colors"
             >
@@ -126,6 +132,14 @@ export default function OraviaHeader() {
               className="py-3.5 px-2 flex items-center justify-between text-[#111111] hover:text-black font-semibold text-lg"
             >
               <span>Ventures</span>
+              <ArrowRight className="w-4 h-4 text-[#888888]" />
+            </a>
+            <a
+              href="#community"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="py-3.5 px-2 flex items-center justify-between text-[#111111] hover:text-black font-semibold text-lg"
+            >
+              <span>Builders Circle</span>
               <ArrowRight className="w-4 h-4 text-[#888888]" />
             </a>
             <a
