@@ -7,7 +7,7 @@ export default function OraviaTrajectorySection() {
   const sectionRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [, setActiveIndex] = useState<number>(0);
 
   const stepsData = [
     {

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowUpRight, Rocket, GraduationCap, Calendar, CheckCircle } from "lucide-react";
+import { ArrowUpRight, Rocket, CheckCircle } from "lucide-react";
 
 export default function VenturesSection() {
   const ventures = [

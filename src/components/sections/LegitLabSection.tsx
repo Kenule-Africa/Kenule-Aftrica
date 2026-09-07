@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import {
   GraduationCap,
   Layout,
@@ -12,7 +11,6 @@ import {
   CheckCircle2,
   ExternalLink,
   Users,
-  Clock,
   MapPin,
 } from "lucide-react";
 

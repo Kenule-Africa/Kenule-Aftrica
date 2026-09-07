@@ -155,6 +155,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${syne.variable} ${instrumentSerif.variable} ${inter.variable} ${jetbrainsMono.variable} scroll-smooth dark`}
+      suppressHydrationWarning
     >
       <head>
         <script
@@ -162,7 +163,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-[#010105] text-[#f5f5fc] font-sans antialiased selection:bg-[#f0b90b]/30 selection:text-[#f0b90b] overflow-x-hidden min-h-screen relative">
+      <body
+        className="bg-[#010105] text-[#f5f5fc] font-sans antialiased selection:bg-[#f0b90b]/30 selection:text-[#f0b90b] overflow-x-hidden min-h-screen relative"
+        suppressHydrationWarning
+      >
         {children}
       </body>
     </html>

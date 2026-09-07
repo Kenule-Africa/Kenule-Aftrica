@@ -1,4 +1,4 @@
-import { ArrowRight, ShieldCheck, MapPin, Zap } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 
 export default function HeroSection() {
   return (

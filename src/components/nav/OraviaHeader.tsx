@@ -76,12 +76,6 @@ export default function OraviaHeader() {
               Methodology
             </a>
             <a
-              href="#legitlab"
-              className="font-sans text-xs font-medium text-[#666666] hover:text-[#111111] transition-colors"
-            >
-              LegitLab
-            </a>
-            <a
               href="#contact"
               className="font-sans text-xs font-medium text-[#666666] hover:text-[#111111] transition-colors"
             >

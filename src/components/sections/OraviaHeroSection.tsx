@@ -213,17 +213,6 @@ export default function OraviaHeroSection() {
                     Impact
                   </text>
                 </svg>
-
-                {/* Floating Confidence Badge */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#111111] text-white text-[10px] font-medium px-3 py-1.5 rounded shadow-xl pointer-events-none">
-                  African Built: 100%
-                </div>
-              </div>
-
-              {/* Card Footer */}
-              <div className="flex items-center justify-between text-[11px] font-mono text-[#666666] pt-3">
-                <span>DeyPay · LegitLab · Jos Expo</span>
-                <span className="text-emerald-600 font-semibold">Active Pipeline</span>
               </div>
             </div>
           </div>

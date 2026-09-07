@@ -1,4 +1,4 @@
-import { GitBranch, Shield, Workflow, ArrowRight, Cpu, Layers } from "lucide-react";
+import { GitBranch, Shield, Workflow, Cpu } from "lucide-react";
 
 export default function OraviaBentoFeatures() {
   return (

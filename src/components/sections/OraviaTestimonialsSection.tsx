@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export default function OraviaTestimonialsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);

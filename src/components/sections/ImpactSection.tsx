@@ -1,4 +1,4 @@
-import { Award, Zap, Users, Globe2, Quote } from "lucide-react";
+import { Zap, Quote } from "lucide-react";
 
 export default function ImpactSection() {
   const stats = [

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowUp, Twitter, Linkedin, Mail, MapPin } from "lucide-react";
+import { ArrowUp, Twitter, Linkedin, Mail } from "lucide-react";
 
 export default function Footer() {
   return (

@@ -1,4 +1,4 @@
-import { CheckCircle2, ShieldCheck, Compass, Lightbulb, Users, Layers } from "lucide-react";
+import { ShieldCheck, Users, Layers } from "lucide-react";
 
 export default function AboutSection() {
   return (
