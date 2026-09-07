@@ -70,12 +70,6 @@ export default function Header() {
               Ventures
             </a>
             <a
-              href="#legitlab"
-              className="hover:text-white transition-colors focus:outline-none focus:text-[#f0b90b]"
-            >
-              LegitLab
-            </a>
-            <a
               href="#impact"
               className="hover:text-white transition-colors focus:outline-none focus:text-[#f0b90b]"
             >
@@ -104,7 +98,7 @@ export default function Header() {
             {/* Mobile Hamburger Button */}
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className="md:hidden p-2.5 rounded-xl bg-white/5 border border-white/10 text-gray-200 hover:text-white hover:bg-white/10 transition-colors"
+              className="md:hidden p-2.5 rounded-xl bg-white/5 text-gray-200 hover:text-white hover:bg-white/10 transition-colors"
               aria-label="Open menu"
             >
               <Menu className="w-5 h-5" />

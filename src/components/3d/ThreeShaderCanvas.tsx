@@ -291,6 +291,7 @@ export default function ThreeShaderCanvas() {
       uniform float uTime;
       uniform vec2 uMouse;
       uniform float uMouseActive;
+      uniform float uCursorMode;
 
       void main() {
           vColor = customColor;
@@ -310,9 +311,11 @@ export default function ThreeShaderCanvas() {
           // Local attraction radius around cursor
           float localAttract = smoothstep(5.8, 0.4, distToCursor);
 
-          // Cohesion blend: scattered by default, assembled when cursor is positioned
+          // Desktop: scattered until the cursor pulls particles in.
+          // Touch / mobile: always fully assembled (no cursor).
           float targetCohesion = clamp(uMouseActive * 0.45 + localAttract * 0.85, 0.0, 1.0);
-          float easedCohesion = smoothstep(0.0, 1.0, targetCohesion);
+          float cursorCohesion = smoothstep(0.0, 1.0, targetCohesion);
+          float easedCohesion = mix(1.0, cursorCohesion, uCursorMode);
           vCohesion = easedCohesion;
 
           // 3. Smooth Magnetic Interpolation: Scatter -> Assembled Africa Structure
@@ -327,8 +330,8 @@ export default function ThreeShaderCanvas() {
           float depthDamping = 1.0 - (layerIndex * 0.05);
           assembled.z += autoWave * depthDamping;
 
-          // Cursor interactive ripple when assembled
-          float cursorRipple = sin(distToCursor * 2.8 - uTime * 3.2) * 0.24 * localAttract * easedCohesion;
+          // Cursor interactive ripple when assembled (desktop only)
+          float cursorRipple = sin(distToCursor * 2.8 - uTime * 3.2) * 0.24 * localAttract * easedCohesion * uCursorMode;
           assembled.z += cursorRipple * depthDamping;
 
           vec4 mvPosition = modelViewMatrix * vec4(assembled, 1.0);
@@ -376,6 +379,7 @@ export default function ThreeShaderCanvas() {
       uTime: { value: 0 },
       uMouse: { value: new THREE.Vector2(0, 0) },
       uMouseActive: { value: 0.0 },
+      uCursorMode: { value: 0.0 },
     };
 
     const material = new THREE.ShaderMaterial({
@@ -402,7 +406,30 @@ export default function ThreeShaderCanvas() {
     let currentMouseActive = 0.0;
     let mouseIdleTimer: NodeJS.Timeout | null = null;
 
+    const cursorQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+
+    const applyCursorMode = () => {
+      const enabled = cursorQuery.matches;
+      uniforms.uCursorMode.value = enabled ? 1.0 : 0.0;
+      if (!enabled) {
+        mouseX = 0;
+        mouseY = 0;
+        targetMouseActive = 0.0;
+        currentMouseActive = 0.0;
+        uniforms.uMouse.value.set(0, 0);
+        uniforms.uMouseActive.value = 0.0;
+        if (mouseIdleTimer) {
+          clearTimeout(mouseIdleTimer);
+          mouseIdleTimer = null;
+        }
+      }
+    };
+
+    applyCursorMode();
+    cursorQuery.addEventListener("change", applyCursorMode);
+
     const handleMouseMove = (e: MouseEvent) => {
+      if (uniforms.uCursorMode.value < 0.5) return;
       mouseX = (e.clientX / window.innerWidth) * 2 - 1;
       mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
       targetMouseActive = 1.0;
@@ -415,6 +442,7 @@ export default function ThreeShaderCanvas() {
     };
 
     const handleMouseLeave = () => {
+      if (uniforms.uCursorMode.value < 0.5) return;
       targetMouseActive = 0.0;
     };
 
@@ -463,10 +491,17 @@ export default function ThreeShaderCanvas() {
       animId = requestAnimationFrame(animate);
       time += 0.012;
 
-      // Smooth lerp for global mouse active state
-      currentMouseActive += (targetMouseActive - currentMouseActive) * 0.05;
+      const cursorEnabled = uniforms.uCursorMode.value > 0.5;
 
-      // Subtle, elegant floating motion + responsive cursor parallax
+      if (cursorEnabled) {
+        currentMouseActive += (targetMouseActive - currentMouseActive) * 0.05;
+      } else {
+        mouseX = 0;
+        mouseY = 0;
+        currentMouseActive = 0;
+      }
+
+      // Subtle floating motion; cursor parallax is desktop-only
       africaGroup.rotation.y = -0.32 + Math.sin(time * 0.4) * 0.03 + mouseX * 0.12;
       africaGroup.rotation.x = 0.55 + Math.cos(time * 0.35) * 0.02 - mouseY * 0.1;
 
@@ -486,6 +521,7 @@ export default function ThreeShaderCanvas() {
     return () => {
       cancelAnimationFrame(animId);
       if (mouseIdleTimer) clearTimeout(mouseIdleTimer);
+      cursorQuery.removeEventListener("change", applyCursorMode);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseleave", handleMouseLeave);
       window.removeEventListener("resize", handleResize);

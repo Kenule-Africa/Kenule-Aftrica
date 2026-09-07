@@ -26,7 +26,6 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const links = [
     { name: "About Us", href: "#about" },
     { name: "Ventures", href: "#ventures" },
-    { name: "LegitLab", href: "#legitlab" },
     { name: "Impact & Numbers", href: "#impact" },
     { name: "Contact", href: "#contact" },
   ];
