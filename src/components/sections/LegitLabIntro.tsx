@@ -1,0 +1,7 @@
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+
+export default function LegitLabIntro() {
+ return <section id="legitlab" className="relative z-10 scroll-mt-24 bg-[#f1f0ed] px-5 py-16 sm:px-8 sm:py-20"><div className="mx-auto grid max-w-6xl items-center gap-8 md:grid-cols-[1fr_280px]"><div className="max-w-xl"><p className="font-mono text-[10px] tracking-[0.16em] text-[#766449]">LEGITLAB ACADEMY / A KENULE AFRICA INITIATIVE</p><h2 className="mt-5 text-3xl font-semibold tracking-tight text-[#111111] sm:text-4xl">Your potential.<br /><span className="font-serif italic font-normal text-[#7e7668]">A new set of possibilities.</span></h2><p className="mt-5 text-sm leading-7 text-[#666666]">Practical digital skills, mentorship, and a community to grow with. Explore five tuition-free learning tracks at LegitLab Academy and take the next step toward work you care about.</p><Link href="/legitlab-academy" className="mt-7 inline-flex items-center gap-4 rounded-md bg-[#111111] px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#333] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-700">Explore the Academy <ArrowUpRight size={17} /></Link></div><div className="hidden overflow-hidden rounded-2xl bg-black md:block"><Image src="/assets/legitlab/monogram.png" alt="LegitLab Academy" width={1254} height={1254} sizes="280px" className="h-auto w-full" /></div></div></section>;
+}

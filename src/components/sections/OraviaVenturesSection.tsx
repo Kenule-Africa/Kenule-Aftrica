@@ -44,9 +44,9 @@ export default function OraviaVenturesSection() {
         "Industry mentors and portfolio building",
         "Direct internship and freelance pathways",
       ],
-      btnText: "Apply to Cohort",
-      btnHref: "https://forms.gle/PzbnPTfnHMCd79uj8",
-      isExternal: true,
+      btnText: "Explore the Academy",
+      btnHref: "/legitlab-academy",
+      isExternal: false,
     },
     {
       id: "venture-expo",
@@ -94,7 +94,7 @@ export default function OraviaVenturesSection() {
                 onMouseEnter={() => setSelectedId(card.id)}
                 onClick={() => setSelectedId(card.id)}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
+                  if (e.target === e.currentTarget && (e.key === "Enter" || e.key === " ")) {
                     e.preventDefault();
                     setSelectedId(card.id);
                   }

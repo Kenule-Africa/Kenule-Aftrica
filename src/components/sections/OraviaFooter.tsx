@@ -44,7 +44,7 @@ export default function OraviaFooter() {
                 </a>
               </li>
               <li>
-                <a href="#legitlab" className="hover:text-[#111111] transition-colors">
+                <a href="/legitlab-academy" className="hover:text-[#111111] transition-colors">
                   LegitLab Academy
                 </a>
               </li>

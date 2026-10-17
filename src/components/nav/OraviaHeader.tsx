@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, Menu, X } from "lucide-react";
 
 export default function OraviaHeader() {
@@ -56,7 +57,8 @@ export default function OraviaHeader() {
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden xl:flex items-center gap-6">
+            <Link href="/legitlab-academy" className="text-xs font-medium text-[#666666] hover:text-[#111111]">LegitLab Academy</Link>
             <a
               href="#about"
               className="font-sans text-xs font-medium text-[#666666] hover:text-[#111111] transition-colors"
@@ -105,7 +107,7 @@ export default function OraviaHeader() {
             {/* Mobile Menu Trigger */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-[#111111] hover:bg-black/5 active:bg-black/10 rounded-lg border border-[#EAEAEA] bg-white transition-colors"
+              className="xl:hidden p-2 text-[#111111] hover:bg-black/5 active:bg-black/10 rounded-lg border border-[#EAEAEA] bg-white transition-colors"
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -116,7 +118,7 @@ export default function OraviaHeader() {
 
       {/* Mobile Drawer */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-[#FAFAFA]/98 backdrop-blur-2xl md:hidden flex flex-col justify-between p-6 pt-24 pb-8 animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-40 bg-[#FAFAFA]/98 backdrop-blur-2xl xl:hidden flex flex-col justify-between p-6 pt-24 pb-8 animate-in fade-in duration-200">
           <div className="flex flex-col gap-1 text-base font-medium text-[#111111] divide-y divide-[#EAEAEA]/80">
             <a
               href="#about"
@@ -151,7 +153,7 @@ export default function OraviaHeader() {
               <ArrowRight className="w-4 h-4 text-[#888888]" />
             </a>
             <a
-              href="#legitlab"
+              href="/legitlab-academy"
               onClick={() => setIsMobileMenuOpen(false)}
               className="py-3.5 px-2 flex items-center justify-between text-[#111111] hover:text-black font-semibold text-lg"
             >

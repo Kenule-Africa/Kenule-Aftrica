@@ -14,7 +14,7 @@ export default function OraviaHeroSection() {
       name: "LegitLab",
       category: "Talent Academy",
       logo: "/assets/legitlab.png",
-      href: "#ventures",
+      href: "/legitlab-academy",
       isExternal: false,
     },
     {
